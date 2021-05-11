@@ -43,7 +43,7 @@ export default function Home() {
                 </GridItem>
                 <GridItem pos="relative" padding={4}>
                     <Text color="hotpink" pos="absolute" top="0" right="0">
-                        map controls (& info?)
+                        map controls (& info?)2
                     </Text>
                     <FormControl>
                         <FormLabel size="md">Map Style</FormLabel>
