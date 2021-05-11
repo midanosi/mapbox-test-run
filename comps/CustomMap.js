@@ -25,7 +25,7 @@ const CustomMap = () => {
         <Box ref={ref} height="100%">
             <ReactMapGL
                 onResize={(newSize) => console.log(`newSize`, newSize)}
-                mapboxApiAccessToken="pk.eyJ1IjoibWlkYW5vc2kiLCJhIjoiY2tvaXVkbXFrMDJ2NzJubzBrNzRzaW1jeCJ9.D-6Tspn0uonHNEtot3iBcg"
+                mapboxApiAccessToken={process.env.MAPBOX_API_ACCESS_TOKEN}
                 mapStyle={`mapbox://styles/mapbox/${mapStyle}`}
                 onViewportChange={setViewportProps}
                 {...viewportProps}
