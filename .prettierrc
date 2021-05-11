@@ -1,0 +1,31 @@
+{
+    "trailingComma": "all",
+    "tabWidth": 4,
+    "semi": false,
+    "singleQuote": false,
+    "jsxSingleQuote": false,
+    "printWidth": 80,
+    "useTabs": false,
+    "arrowParens": "always",
+    "overrides": [
+      {
+        "files": ["*.json", ".*.json"],
+        "options": {
+          "tabWidth": 2
+        }
+      },
+      {
+        "files": [".prettierrc"],
+        "options": {
+          "tabWidth": 2
+        }
+      },
+      {
+        "files": ["package.json"],
+        "options": {
+          "tabWidth": 4
+        }
+      }
+    ]
+  }
+  
