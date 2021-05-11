@@ -7,7 +7,7 @@ import { Box } from "@chakra-ui/react"
 const CustomMap = () => {
     const ref = React.useRef(null)
     const size = useComponentSize(ref)
-    console.log(`size`, size)
+
     const [viewportProps, setViewportProps] = React.useState(() => ({
         width: size.width,
         height: size.height,
@@ -24,8 +24,9 @@ const CustomMap = () => {
     return (
         <Box ref={ref} height="100%">
             <ReactMapGL
-                onResize={(newSize) => console.log(`newSize`, newSize)}
-                mapboxApiAccessToken={process.env.MAPBOX_API_ACCESS_TOKEN}
+                mapboxApiAccessToken={
+                    process.env.NEXT_PUBLIC_MAPBOX_API_ACCESS_TOKEN
+                }
                 mapStyle={`mapbox://styles/mapbox/${mapStyle}`}
                 onViewportChange={setViewportProps}
                 {...viewportProps}
