@@ -1,5 +1,5 @@
 import React from "react"
-import ReactMapGL from "react-map-gl"
+import ReactMapGL, { NavigationControl, FlyToInterpolator } from "react-map-gl"
 import { useMapStyles } from "../hooks/useMapStyles"
 import useComponentSize from "@rehooks/component-size"
 import {
@@ -110,7 +110,15 @@ const CustomMap = () => {
                 // mapStyle="mapbox://styles/midanosi/ckokba5is41ik18qvys8yasgw" // custom style I made in mapbox studio
                 onViewportChange={setViewportProps}
                 {...viewportProps}
+                transitionDuration={2000}
+                transitionInterpolator={new FlyToInterpolator()}
             >
+                <NavigationControl
+                    style={{
+                        top: 100,
+                        right: 10,
+                    }}
+                />
                 <PotholeLayer />
             </ReactMapGL>
         </Box>
