@@ -13,6 +13,7 @@ import {
     FormLabel,
 } from "@chakra-ui/react"
 import { useMapStyles } from "../hooks/useMapStyles"
+import { PotholeDataList } from "../comps/PotholeDataList"
 
 export default function Home() {
     const Map = dynamic(() => import("../comps/CustomMap"), {
@@ -59,9 +60,8 @@ export default function Home() {
                     <HStack spacing={4}></HStack>
                 </GridItem>
                 <GridItem pos="relative">
-                    <Text color="hotpink" pos="absolute" top="0" right="0">
-                        sidebar for data
-                    </Text>
+                    <Center padding={8}>data selection controls</Center>
+                    <PotholeDataList />
                 </GridItem>
                 <GridItem>
                     <Map />
