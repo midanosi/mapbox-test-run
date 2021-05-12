@@ -63,50 +63,50 @@ const CustomMap = () => {
     )
 
     return (
-        <Box ref={ref} height="100%" position="relative">
-            <HStack position="absolute" zIndex={1} padding={4}>
-                {Object.entries(presets).map(([key, vals]) => (
-                    <Button
-                        variant="outline"
-                        colorScheme="blue"
-                        onClick={() =>
-                            setViewportProps((oldProps) => ({
-                                ...oldProps,
-                                ...vals,
-                            }))
-                        }
-                    >
-                        {key}
-                    </Button>
-                ))}
-            </HStack>
-            <HStack
-                position="absolute"
-                right="0"
-                spacing={4}
-                paddingY={2}
-                paddingX={4}
-                bgColor="#0008"
-                zIndex={1}
-                sx={{
-                    fontVariantNumeric: "tabular-nums",
-                }}
-            >
-                <Box color="white">
-                    <HStack>
-                        <Text fontWeight="extrabold">Zoom</Text>
-                        <Text>{viewportProps.zoom.toFixed(0)}</Text>
-                    </HStack>
-                    <HStack>
-                        <Text fontWeight="extrabold">Lat</Text>
-                        <Text>{viewportProps.latitude.toFixed(4)}</Text>
-                    </HStack>
-                    <HStack>
-                        <Text fontWeight="extrabold">Lng</Text>
-                        <Text>{viewportProps.longitude.toFixed(4)}</Text>
-                    </HStack>
-                </Box>
-                <DarkMode>
+        <DarkMode>
+            <Box ref={ref} height="100%" position="relative">
+                <HStack position="absolute" zIndex={1} padding={4}>
+                    {Object.entries(presets).map(([key, vals]) => (
+                        <Button
+                            variant="outline"
+                            colorScheme="blue"
+                            onClick={() =>
+                                setViewportProps((oldProps) => ({
+                                    ...oldProps,
+                                    ...vals,
+                                }))
+                            }
+                        >
+                            {key}
+                        </Button>
+                    ))}
+                </HStack>
+                <HStack
+                    position="absolute"
+                    right="0"
+                    spacing={4}
+                    paddingY={2}
+                    paddingX={4}
+                    bgColor="#0008"
+                    zIndex={1}
+                    sx={{
+                        fontVariantNumeric: "tabular-nums",
+                    }}
+                >
+                    <Box color="white">
+                        <HStack>
+                            <Text fontWeight="extrabold">Zoom</Text>
+                            <Text>{viewportProps.zoom.toFixed(0)}</Text>
+                        </HStack>
+                        <HStack>
+                            <Text fontWeight="extrabold">Lat</Text>
+                            <Text>{viewportProps.latitude.toFixed(4)}</Text>
+                        </HStack>
+                        <HStack>
+                            <Text fontWeight="extrabold">Lng</Text>
+                            <Text>{viewportProps.longitude.toFixed(4)}</Text>
+                        </HStack>
+                    </Box>
                     <Button
                         onClick={onCopy}
                         variant="outline"
@@ -116,28 +116,28 @@ const CustomMap = () => {
                     >
                         {hasCopied ? "Copied" : "Copy"}
                     </Button>
-                </DarkMode>
-            </HStack>
-            <ReactMapGL
-                mapboxApiAccessToken={
-                    process.env.NEXT_PUBLIC_MAPBOX_API_ACCESS_TOKEN
-                }
-                mapStyle={`mapbox://styles/mapbox/${mapStyle}`}
-                // mapStyle="mapbox://styles/midanosi/ckokba5is41ik18qvys8yasgw" // custom style I made in mapbox studio
-                onViewportChange={setViewportProps}
-                {...viewportProps}
-                transitionDuration={2000}
-                transitionInterpolator={new FlyToInterpolator()}
-            >
-                <NavigationControl
-                    style={{
-                        top: 100,
-                        right: 10,
-                    }}
-                />
-                <PotholeLayer />
-            </ReactMapGL>
-        </Box>
+                </HStack>
+                <ReactMapGL
+                    mapboxApiAccessToken={
+                        process.env.NEXT_PUBLIC_MAPBOX_API_ACCESS_TOKEN
+                    }
+                    mapStyle={`mapbox://styles/mapbox/${mapStyle}`}
+                    // mapStyle="mapbox://styles/midanosi/ckokba5is41ik18qvys8yasgw" // custom style I made in mapbox studio
+                    onViewportChange={setViewportProps}
+                    {...viewportProps}
+                    transitionDuration={2000}
+                    transitionInterpolator={new FlyToInterpolator()}
+                >
+                    <NavigationControl
+                        style={{
+                            top: 100,
+                            right: 10,
+                        }}
+                    />
+                    <PotholeLayer />
+                </ReactMapGL>
+            </Box>
+        </DarkMode>
     )
 }
 
