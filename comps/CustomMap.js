@@ -98,8 +98,6 @@ const CustomMap = () => {
                             // mapStyle="mapbox://styles/midanosi/ckokba5is41ik18qvys8yasgw" // custom style I made in mapbox studio
                             onViewportChange={setViewportProps}
                             {...viewportProps}
-                            // transitionDuration={2000}
-                            // transitionInterpolator={new FlyToInterpolator()}
                         >
                             <NavigationControl
                                 style={{
