@@ -1,7 +1,5 @@
 import React from "react"
 import ReactMapGL, { NavigationControl, FlyToInterpolator } from "react-map-gl"
-import { useMapStyles } from "../hooks/useMapStyles"
-import { useViewportProps } from "../hooks/useViewportProps"
 import AutoSizer from "react-virtualized-auto-sizer"
 import {
     Box,
@@ -12,10 +10,12 @@ import {
     DarkMode,
 } from "@chakra-ui/react"
 import PotholeLayer from "../comps/PotholeLayer"
+import { viewportPropsAtom, useAtom, mapStylesAtom } from "../store"
+import { presets } from "../data/presets"
 
 const CustomMap = () => {
-    const { viewportProps, setViewportProps, presets } = useViewportProps()
-    const { mapStyle } = useMapStyles()
+    const [mapStyle] = useAtom(mapStylesAtom)
+    const [viewportProps, setViewportProps] = useAtom(viewportPropsAtom)
 
     const { hasCopied, onCopy } = useClipboard(
         JSON.stringify(

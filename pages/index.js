@@ -12,15 +12,15 @@ import {
     FormControl,
     FormLabel,
 } from "@chakra-ui/react"
-import { useMapStyles } from "../hooks/useMapStyles"
 import { PotholeDataList } from "../comps/PotholeDataList"
+import { mapStylesAtom, useAtom } from "../store"
 
 export default function Home() {
     const Map = dynamic(() => import("../comps/CustomMap"), {
         loading: () => <p>loading...</p>,
         ssr: false,
     })
-    const { setMapStyle } = useMapStyles()
+    const [, setMapStyle] = useAtom(mapStylesAtom)
 
     return (
         <>

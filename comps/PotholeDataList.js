@@ -2,10 +2,13 @@ import potholeGeoJSON from "../data/pothole_enquiries_2019.json"
 import { FixedSizeList as List } from "react-window"
 import AutoSizer from "react-virtualized-auto-sizer"
 import { VStack, Text } from "@chakra-ui/react"
+import { FlyToInterpolator } from "react-map-gl"
+import { useAtom, viewportPropsAtom } from "../store"
 
 const features = potholeGeoJSON.features
 
 const PotholeListRow = ({ index, style }) => {
+    const [, setViewportProps] = useAtom(viewportPropsAtom)
     const feature = features[index]
     const {
         ENQUIRY_CATEGORY: category,
@@ -30,6 +33,15 @@ const PotholeListRow = ({ index, style }) => {
                 color: "#fefefe",
                 borderRightColor: "tomato",
             }}
+            onClick={() =>
+                setViewportProps({
+                    longitude: coords[0],
+                    latitude: coords[1],
+                    zoom: 13,
+                    transitionDuration: 2000,
+                    transitionInterpolator: new FlyToInterpolator(),
+                })
+            }
         >
             <Text>{category}</Text>
             <Text>{dateRecorded}</Text>

@@ -1,6 +1,4 @@
-import create from 'zustand'
-
-const presets = {
+export const presets = {
     ireland: {
         zoom: 7.738205798290154,
         latitude: 54.65442014953111,
@@ -21,19 +19,4 @@ const presets = {
         longitude: 0.1218,
         zoom: 13,
     },
-} as const
-
-type ViewportPropsState = {
-    viewportProps: any,
-    setViewportProps: (newProps: any) => void
 }
-
-export const useViewportProps = create<ViewportPropsState>((set) => ({
-    presets,
-    viewportProps: presets.cambridge,
-    setViewportProps: (newViewportProps) => set((prevState) => {
-        console.log(`newViewportProps`, newViewportProps)
-        return {
-        viewportProps: newViewportProps,
-    }}),
-}))
