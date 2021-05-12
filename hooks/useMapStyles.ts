@@ -1,5 +1,3 @@
-import { ModalOverlayProps } from '@chakra-ui/react'
-import React from 'react'
 import create from 'zustand'
 
 enum MapStyles {
@@ -14,5 +12,5 @@ type MapStylesState = {
 
 export const useMapStyles = create<MapStylesState>((set) => ({
     mapStyle: 'dark-v10',
-    setMapStyle: (newMapStyle) => set(state => ({mapStyle: newMapStyle})),
+    setMapStyle: (newMapStyle) => set(() => ({mapStyle: newMapStyle})),
 }))
