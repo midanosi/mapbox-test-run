@@ -14,19 +14,19 @@ import PotholeLayer from "../comps/PotholeLayer"
 
 const presets = {
     ireland: {
-        latitude: 1,
-        longitude: 1,
-        zoom: 10,
+        zoom: 7.738205798290154,
+        latitude: 54.65442014953111,
+        longitude: -6.601189039648633,
     },
     irelandZoomedIn: {
-        latitude: 1,
-        longitude: 1,
-        zoom: 13,
+        zoom: 9.738205798290153,
+        latitude: 54.65442014953111,
+        longitude: -6.601189039648633,
     },
     US: {
-        latitude: 1,
-        longitude: 1,
-        zoom: 2,
+        zoom: 3.1382057982901514,
+        latitude: 38.46351765340368,
+        longitude: -94.64675601291836,
     },
     cambridge: {
         latitude: 52.2053,
@@ -64,6 +64,22 @@ const CustomMap = () => {
 
     return (
         <Box ref={ref} height="100%" position="relative">
+            <HStack position="absolute" zIndex={1} padding={4}>
+                {Object.entries(presets).map(([key, vals]) => (
+                    <Button
+                        variant="outline"
+                        colorScheme="blue"
+                        onClick={() =>
+                            setViewportProps((oldProps) => ({
+                                ...oldProps,
+                                ...vals,
+                            }))
+                        }
+                    >
+                        {key}
+                    </Button>
+                ))}
+            </HStack>
             <HStack
                 position="absolute"
                 right="0"
