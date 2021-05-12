@@ -1,7 +1,8 @@
 import React from "react"
 import ReactMapGL, { NavigationControl, FlyToInterpolator } from "react-map-gl"
 import { useMapStyles } from "../hooks/useMapStyles"
-import useComponentSize from "@rehooks/component-size"
+import { useViewportProps } from "../hooks/useViewportProps"
+import AutoSizer from "react-virtualized-auto-sizer"
 import {
     Box,
     HStack,
@@ -12,43 +13,9 @@ import {
 } from "@chakra-ui/react"
 import PotholeLayer from "../comps/PotholeLayer"
 
-const presets = {
-    ireland: {
-        zoom: 7.738205798290154,
-        latitude: 54.65442014953111,
-        longitude: -6.601189039648633,
-    },
-    irelandZoomedIn: {
-        zoom: 9.738205798290153,
-        latitude: 54.65442014953111,
-        longitude: -6.601189039648633,
-    },
-    US: {
-        zoom: 3.1382057982901514,
-        latitude: 38.46351765340368,
-        longitude: -94.64675601291836,
-    },
-    cambridge: {
-        latitude: 52.2053,
-        longitude: 0.1218,
-        zoom: 13,
-    },
-}
-
 const CustomMap = () => {
-    const ref = React.useRef(null)
-    const size = useComponentSize(ref)
-
-    const [viewportProps, setViewportProps] = React.useState(() => ({
-        width: size.width,
-        height: size.height,
-        ...presets.cambridge,
-    }))
+    const { viewportProps, setViewportProps, presets } = useViewportProps()
     const { mapStyle } = useMapStyles()
-
-    React.useEffect(() => {
-        setViewportProps((oldProps) => ({ ...oldProps, ...size }))
-    }, [size])
 
     const { hasCopied, onCopy } = useClipboard(
         JSON.stringify(
@@ -64,17 +31,19 @@ const CustomMap = () => {
 
     return (
         <DarkMode>
-            <Box ref={ref} height="100%" position="relative">
+            <Box height="100%" width="100%" position="relative">
                 <HStack position="absolute" zIndex={1} padding={4}>
                     {Object.entries(presets).map(([key, vals]) => (
                         <Button
                             variant="outline"
                             colorScheme="blue"
                             onClick={() =>
-                                setViewportProps((oldProps) => ({
-                                    ...oldProps,
+                                setViewportProps({
                                     ...vals,
-                                }))
+                                    transitionDuration: 2500,
+                                    transitionInterpolator:
+                                        new FlyToInterpolator(),
+                                })
                             }
                         >
                             {key}
@@ -117,25 +86,31 @@ const CustomMap = () => {
                         {hasCopied ? "Copied" : "Copy"}
                     </Button>
                 </HStack>
-                <ReactMapGL
-                    mapboxApiAccessToken={
-                        process.env.NEXT_PUBLIC_MAPBOX_API_ACCESS_TOKEN
-                    }
-                    mapStyle={`mapbox://styles/mapbox/${mapStyle}`}
-                    // mapStyle="mapbox://styles/midanosi/ckokba5is41ik18qvys8yasgw" // custom style I made in mapbox studio
-                    onViewportChange={setViewportProps}
-                    {...viewportProps}
-                    transitionDuration={2000}
-                    transitionInterpolator={new FlyToInterpolator()}
-                >
-                    <NavigationControl
-                        style={{
-                            top: 100,
-                            right: 10,
-                        }}
-                    />
-                    <PotholeLayer />
-                </ReactMapGL>
+                <AutoSizer>
+                    {({ height, width }) => (
+                        <ReactMapGL
+                            height={height}
+                            width={width}
+                            mapboxApiAccessToken={
+                                process.env.NEXT_PUBLIC_MAPBOX_API_ACCESS_TOKEN
+                            }
+                            mapStyle={`mapbox://styles/mapbox/${mapStyle}`}
+                            // mapStyle="mapbox://styles/midanosi/ckokba5is41ik18qvys8yasgw" // custom style I made in mapbox studio
+                            onViewportChange={setViewportProps}
+                            {...viewportProps}
+                            // transitionDuration={2000}
+                            // transitionInterpolator={new FlyToInterpolator()}
+                        >
+                            <NavigationControl
+                                style={{
+                                    top: 100,
+                                    right: 10,
+                                }}
+                            />
+                            <PotholeLayer />
+                        </ReactMapGL>
+                    )}
+                </AutoSizer>
             </Box>
         </DarkMode>
     )

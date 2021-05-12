@@ -873,11 +873,6 @@
     prop-types "^15.7.2"
     tslib "^2.1.0"
 
-"@rehooks/component-size@^1.0.3":
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/@rehooks/component-size/-/component-size-1.0.3.tgz#823eabeb42084893d46d43e3a9d1d0e34252b3cb"
-  integrity sha512-pnYld+8SSF2vXwdLOqBGUyOrv/SjzwLjIUcs/4c1JJgR0q4E9eBtBfuZMD6zUD51fvSehSsbnlQMzotSmPTXPg==
-
 "@turf/along@^6.3.0":
   version "6.3.0"
   resolved "https://registry.yarnpkg.com/@turf/along/-/along-6.3.0.tgz#9a1d2d418027945f113e15029f53069b335bf426"

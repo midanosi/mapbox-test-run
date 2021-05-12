@@ -11,7 +11,6 @@
         "@chakra-ui/react": "^1.6.1",
         "@emotion/react": "^11",
         "@emotion/styled": "^11",
-        "@rehooks/component-size": "^1.0.3",
         "@turf/turf": "^6.3.0",
         "framer-motion": "^4",
         "next": "10.2.0",
