@@ -2,7 +2,14 @@ import React from "react"
 import ReactMapGL from "react-map-gl"
 import { useMapStyles } from "../hooks/useMapStyles"
 import useComponentSize from "@rehooks/component-size"
-import { Box } from "@chakra-ui/react"
+import {
+    Box,
+    HStack,
+    Text,
+    useClipboard,
+    Button,
+    DarkMode,
+} from "@chakra-ui/react"
 import PotholeLayer from "../comps/PotholeLayer"
 
 const presets = {
@@ -43,9 +50,58 @@ const CustomMap = () => {
         setViewportProps((oldProps) => ({ ...oldProps, ...size }))
     }, [size])
 
+    const { hasCopied, onCopy } = useClipboard(
+        JSON.stringify(
+            {
+                zoom: viewportProps.zoom,
+                latitude: viewportProps.latitude,
+                longitude: viewportProps.longitude,
+            },
+            null,
+            2,
+        ),
+    )
+
     return (
         <Box ref={ref} height="100%" position="relative">
-        <Box ref={ref} height="100%">
+            <HStack
+                position="absolute"
+                right="0"
+                spacing={4}
+                paddingY={2}
+                paddingX={4}
+                bgColor="#0008"
+                zIndex={1}
+                sx={{
+                    fontVariantNumeric: "tabular-nums",
+                }}
+            >
+                <Box color="white">
+                    <HStack>
+                        <Text fontWeight="extrabold">Zoom</Text>
+                        <Text>{viewportProps.zoom.toFixed(0)}</Text>
+                    </HStack>
+                    <HStack>
+                        <Text fontWeight="extrabold">Lat</Text>
+                        <Text>{viewportProps.latitude.toFixed(4)}</Text>
+                    </HStack>
+                    <HStack>
+                        <Text fontWeight="extrabold">Lng</Text>
+                        <Text>{viewportProps.longitude.toFixed(4)}</Text>
+                    </HStack>
+                </Box>
+                <DarkMode>
+                    <Button
+                        onClick={onCopy}
+                        variant="outline"
+                        colorScheme="orange"
+                        w={16}
+                        size="sm"
+                    >
+                        {hasCopied ? "Copied" : "Copy"}
+                    </Button>
+                </DarkMode>
+            </HStack>
             <ReactMapGL
                 mapboxApiAccessToken={
                     process.env.NEXT_PUBLIC_MAPBOX_API_ACCESS_TOKEN
