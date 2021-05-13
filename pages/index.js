@@ -17,7 +17,7 @@ import { PotholeDataList } from "../comps/PotholeDataList"
 import { mapStylesAtom, useAtom } from "../store"
 
 export default function Home() {
-    const Map = dynamic(() => import("../comps/CustomMap"), {
+    const MapSection = dynamic(() => import("../comps/MapSection"), {
         loading: () => <p>loading...</p>, // eslint-disable-line react/display-name
         ssr: false,
     })
@@ -65,7 +65,7 @@ export default function Home() {
                     <PotholeDataList />
                 </GridItem>
                 <GridItem>
-                    <Map />
+                    <MapSection />
                 </GridItem>
             </Grid>
         </>
