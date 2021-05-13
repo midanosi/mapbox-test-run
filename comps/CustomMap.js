@@ -22,8 +22,6 @@ const CustomMap = () => {
                 <AutoSizer>
                     {({ height, width }) => (
                         <ReactMapGL
-                            height={height}
-                            width={width}
                             mapboxApiAccessToken={
                                 process.env.NEXT_PUBLIC_MAPBOX_API_ACCESS_TOKEN
                             }
@@ -31,6 +29,8 @@ const CustomMap = () => {
                             // mapStyle="mapbox://styles/midanosi/ckokba5is41ik18qvys8yasgw" // custom style I made in mapbox studio
                             onViewportChange={setViewportProps}
                             {...viewportProps}
+                            height={height}
+                            width={width}
                         >
                             <NavigationControl
                                 style={{
