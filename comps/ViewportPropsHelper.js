@@ -27,6 +27,7 @@ export const ViewportPropsHelper = () => {
             paddingX={4}
             bgColor="#0008"
             zIndex={1}
+            userSelect="none"
             sx={{
                 fontVariantNumeric: "tabular-nums",
             }}
