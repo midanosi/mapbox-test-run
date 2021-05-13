@@ -1,3 +1,4 @@
+import React from "react"
 import { Text, VStack } from "@chakra-ui/react"
 import { FlyToInterpolator } from "react-map-gl"
 import AutoSizer from "react-virtualized-auto-sizer"
@@ -21,7 +22,6 @@ const PotholeListRow = ({ index, style }) => {
 
     return (
         <VStack
-            onClick={() => alert(JSON.stringify(coords))}
             style={style}
             cursor="pointer"
             alignItems="start"
