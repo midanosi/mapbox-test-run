@@ -1,4 +1,6 @@
+import React from "react"
 import { Layer, Source } from "react-map-gl"
+
 import potholeGeoJSON from "../data/pothole_enquiries_2019.json"
 
 const layerStyle = {

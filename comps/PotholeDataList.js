@@ -1,8 +1,9 @@
-import potholeGeoJSON from "../data/pothole_enquiries_2019.json"
-import { FixedSizeList as List } from "react-window"
-import AutoSizer from "react-virtualized-auto-sizer"
-import { VStack, Text } from "@chakra-ui/react"
+import { Text, VStack } from "@chakra-ui/react"
 import { FlyToInterpolator } from "react-map-gl"
+import AutoSizer from "react-virtualized-auto-sizer"
+import { FixedSizeList as List } from "react-window"
+
+import potholeGeoJSON from "../data/pothole_enquiries_2019.json"
 import { useAtom, viewportPropsAtom } from "../store"
 
 const features = potholeGeoJSON.features

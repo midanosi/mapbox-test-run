@@ -1,5 +1,7 @@
-import { Button, HStack, Box, Text, useClipboard } from "@chakra-ui/react"
-import { viewportPropsAtom, useAtom } from "../store"
+import React from "react"
+import { Box, Button, HStack, Text, useClipboard } from "@chakra-ui/react"
+
+import { useAtom, viewportPropsAtom } from "../store"
 
 export const ViewportPropsHelper = () => {
     const [viewportProps] = useAtom(viewportPropsAtom)

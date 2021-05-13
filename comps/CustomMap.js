@@ -1,9 +1,11 @@
 import React from "react"
+import { Box, DarkMode } from "@chakra-ui/react"
 import ReactMapGL, { NavigationControl } from "react-map-gl"
 import AutoSizer from "react-virtualized-auto-sizer"
-import { Box, DarkMode } from "@chakra-ui/react"
+
+import { mapStylesAtom, useAtom, viewportPropsAtom } from "../store"
+
 import PotholeLayer from "./PotholeLayer"
-import { viewportPropsAtom, useAtom, mapStylesAtom } from "../store"
 import { PresetLocationsButtons } from "./PresetLocationsButtons"
 import { ViewportPropsHelper } from "./ViewportPropsHelper"
 

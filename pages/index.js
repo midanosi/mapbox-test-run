@@ -1,23 +1,24 @@
-import Head from "next/head"
 import React from "react"
-import dynamic from "next/dynamic"
 import {
-    Grid,
-    GridItem,
-    Select,
-    HStack,
-    Text,
     Center,
-    Heading,
     FormControl,
     FormLabel,
+    Grid,
+    GridItem,
+    Heading,
+    HStack,
+    Select,
+    Text,
 } from "@chakra-ui/react"
+import dynamic from "next/dynamic"
+import Head from "next/head"
+
 import { PotholeDataList } from "../comps/PotholeDataList"
 import { mapStylesAtom, useAtom } from "../store"
 
 export default function Home() {
     const Map = dynamic(() => import("../comps/CustomMap"), {
-        loading: () => <p>loading...</p>,
+        loading: () => <p>loading...</p>, // eslint-disable-line react/display-name
         ssr: false,
     })
     const [, setMapStyle] = useAtom(mapStylesAtom)
