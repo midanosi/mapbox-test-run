@@ -1,0 +1,45 @@
+{
+    "settings": {
+        "react": {
+            "version": "detect"
+        }
+    },
+    "env": {
+        "es2020": true,
+        "es6": true,
+        "browser": true
+    },
+    "extends": [
+        "eslint:recommended",
+        "plugin:prettier/recommended",
+        "plugin:react/recommended"
+        // "plugin:import/errors",
+        // "plugin:import/warnings"
+    ],
+    "plugins": ["simple-import-sort", "react", "prettier"],
+    "rules": {
+        "prettier/prettier": "error",
+        "react/prop-types": "off",
+        "simple-import-sort/imports": [
+            "error",
+            {
+                "groups": [
+                    // Packages. `react` related packages come first.
+                    ["^react$", "^@?\\w"],
+                    // Side effect imports.
+                    ["^\\u0000"],
+                    // Parent imports. Put `..` last.
+                    ["^\\.\\.(?!/?$)", "^\\.\\./?$"],
+                    // Other relative imports. Put same-folder imports and `.` last.
+                    ["^\\./(?=.*/)(?!/?$)", "^\\.(?!/?$)", "^\\./?$"],
+                    // clsx and style imports
+                    ["^.+\\.s?css$", "^clsx"]
+                ]
+            }
+        ]
+    },
+    "parserOptions": {
+        "sourceType": "module",
+        "ecmaVersion": 11
+    }
+}
