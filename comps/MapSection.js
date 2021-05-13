@@ -38,19 +38,17 @@ const ReactMapGLWrapper = ({ height, width }) => {
 
 const MapSection = () => {
     return (
-        <>
+        <Box height="100%" width="100%" position="relative">
             <DarkMode>
-                <Box height="100%" width="100%" position="relative">
-                    <PresetLocationsButtons />
-                    <ViewportPropsHelper />
-                </Box>
+                <PresetLocationsButtons />
+                <ViewportPropsHelper />
             </DarkMode>
             <AutoSizer>
                 {({ height, width }) => (
                     <ReactMapGLWrapper height={height} width={width} />
                 )}
             </AutoSizer>
-        </>
+        </Box>
     )
 }
 
