@@ -3,7 +3,12 @@ import { Box, DarkMode } from "@chakra-ui/react"
 import ReactMapGL, { NavigationControl } from "react-map-gl"
 import AutoSizer from "react-virtualized-auto-sizer"
 
-import { mapStylesAtom, useAtom, viewportPropsAtom } from "../store"
+import {
+    mapStylesAtom,
+    selectedPotholeAtom,
+    useAtom,
+    viewportPropsAtom,
+} from "../store"
 
 import PotholeLayer from "./PotholeLayer"
 import { PresetLocationsButtons } from "./PresetLocationsButtons"
@@ -12,6 +17,16 @@ import { ViewportPropsHelper } from "./ViewportPropsHelper"
 const ReactMapGLWrapper = ({ height, width }) => {
     const [mapStyle] = useAtom(mapStylesAtom)
     const [viewportProps, setViewportProps] = useAtom(viewportPropsAtom)
+    const [, setSelectedPothole] = useAtom(selectedPotholeAtom)
+
+    const handleMapClick = (e) => {
+        const features = e.features
+
+        const pothole =
+            features.find((feature) => feature.source === "potholes_2019") ??
+            null // this will be null if map click isn't over a pothole, so this handles deselection too
+        setSelectedPothole(pothole)
+    }
 
     return (
         <ReactMapGL
@@ -24,6 +39,7 @@ const ReactMapGLWrapper = ({ height, width }) => {
             {...viewportProps}
             height={height}
             width={width}
+            onClick={handleMapClick}
         >
             <NavigationControl
                 style={{

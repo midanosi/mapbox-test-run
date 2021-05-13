@@ -5,12 +5,16 @@ import AutoSizer from "react-virtualized-auto-sizer"
 import { FixedSizeList as List } from "react-window"
 
 import potholeGeoJSON from "../data/pothole_enquiries_2019.json"
-import { useAtom, viewportPropsAtom } from "../store"
+import { selectedPotholeAtom, useAtom, viewportPropsAtom } from "../store"
+import { addSequentialIdsToGeoJSON } from "../utils/addSequentialIdsToGeoJSON"
 
-const features = potholeGeoJSON.features
+const mappedGeoJSON = addSequentialIdsToGeoJSON(potholeGeoJSON) // TODO: do this cleaning/modifying with jq and then import that file
+
+const features = mappedGeoJSON.features
 
 const PotholeListRow = ({ index, style }) => {
     const [, setViewportProps] = useAtom(viewportPropsAtom)
+    const [selectedPothole, setSelectedPothole] = useAtom(selectedPotholeAtom)
     const feature = features[index]
     const {
         ENQUIRY_CATEGORY: category,
@@ -34,7 +38,7 @@ const PotholeListRow = ({ index, style }) => {
                 color: "#fefefe",
                 borderRightColor: "tomato",
             }}
-            onClick={() =>
+            onClick={() => {
                 setViewportProps({
                     longitude: coords[0],
                     latitude: coords[1],
@@ -42,21 +46,37 @@ const PotholeListRow = ({ index, style }) => {
                     transitionDuration: 2000,
                     transitionInterpolator: new FlyToInterpolator(),
                 })
-            }
+                setSelectedPothole(feature)
+            }}
         >
             <Text>{category}</Text>
             <Text>{dateRecorded}</Text>
             <Text>{division}</Text>
             <Text fontWeight="bold">{office}</Text>
+            {selectedPothole?.id === feature.id ? (
+                <Text fontWeight="extrabold" color="tomato" fontSize={24}>
+                    SELECTED!
+                </Text>
+            ) : null}
         </VStack>
     )
 }
 
 const PotholeDataList = () => {
+    const listRef = React.useRef()
+    const [selectedPothole] = useAtom(selectedPotholeAtom)
+
+    React.useEffect(() => {
+        const idx = selectedPothole?.id
+        if (idx) {
+            listRef.current.scrollToItem(idx, "smart")
+        }
+    }, [selectedPothole])
     return (
         <AutoSizer>
             {({ height, width }) => (
                 <List
+                    ref={listRef}
                     height={height}
                     width={width}
                     itemSize={200}

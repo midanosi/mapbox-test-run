@@ -61,7 +61,7 @@ export default function Home() {
                     <HStack spacing={4}></HStack>
                 </GridItem>
                 <GridItem pos="relative">
-                    <Center padding={8}>data selection controls</Center>
+                    {/* <Center padding={8}>data selection controls</Center> */}
                     <PotholeDataList />
                 </GridItem>
                 <GridItem>
