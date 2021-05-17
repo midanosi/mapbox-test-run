@@ -18,3 +18,7 @@ a {
 .mapboxgl-ctrl button.mapboxgl-ctrl-compass.mapboxgl-ctrl-icon {
     background-image: url("../public/mapboxgl-ctrl-compass.svg");
 }
+
+.pothole-list {
+    scroll-behavior: smooth;
+}

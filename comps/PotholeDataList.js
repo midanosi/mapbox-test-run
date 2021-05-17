@@ -76,6 +76,7 @@ const PotholeDataList = () => {
         <AutoSizer>
             {({ height, width }) => (
                 <List
+                    className="pothole-list"
                     ref={listRef}
                     height={height}
                     width={width}
