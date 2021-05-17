@@ -5,7 +5,12 @@ import AutoSizer from "react-virtualized-auto-sizer"
 import { FixedSizeList as List } from "react-window"
 
 import potholeGeoJSON from "../data/pothole_enquiries_2019.json"
-import { selectedPotholeAtom, useAtom, viewportPropsAtom } from "../store"
+import {
+    isPopupOpenAtom,
+    selectedPotholeAtom,
+    useAtom,
+    viewportPropsAtom,
+} from "../store"
 import { addSequentialIdsToGeoJSON } from "../utils/addSequentialIdsToGeoJSON"
 
 const mappedGeoJSON = addSequentialIdsToGeoJSON(potholeGeoJSON) // TODO: do this cleaning/modifying with jq and then import that file
@@ -15,6 +20,7 @@ const features = mappedGeoJSON.features
 const PotholeListRow = ({ index, style }) => {
     const [, setViewportProps] = useAtom(viewportPropsAtom)
     const [selectedPothole, setSelectedPothole] = useAtom(selectedPotholeAtom)
+    const [, setIsPopupOpen] = useAtom(isPopupOpenAtom)
     const feature = features[index]
     const {
         ENQUIRY_CATEGORY: category,
@@ -47,6 +53,7 @@ const PotholeListRow = ({ index, style }) => {
                     transitionInterpolator: new FlyToInterpolator(),
                 })
                 setSelectedPothole(feature)
+                setIsPopupOpen(true)
             }}
         >
             <Text>{category}</Text>

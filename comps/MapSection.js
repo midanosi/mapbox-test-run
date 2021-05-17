@@ -4,6 +4,7 @@ import ReactMapGL, { NavigationControl } from "react-map-gl"
 import AutoSizer from "react-virtualized-auto-sizer"
 
 import {
+    isPopupOpenAtom,
     mapStylesAtom,
     selectedPotholeAtom,
     useAtom,
@@ -11,6 +12,7 @@ import {
 } from "../store"
 
 import PotholeLayer from "./PotholeLayer"
+import { PotholePopup } from "./PotholePopup"
 import { PresetLocationsButtons } from "./PresetLocationsButtons"
 import { ViewportPropsHelper } from "./ViewportPropsHelper"
 
@@ -18,6 +20,7 @@ const ReactMapGLWrapper = ({ height, width }) => {
     const [mapStyle] = useAtom(mapStylesAtom)
     const [viewportProps, setViewportProps] = useAtom(viewportPropsAtom)
     const [, setSelectedPothole] = useAtom(selectedPotholeAtom)
+    const [, setIsPopupOpen] = useAtom(isPopupOpenAtom)
 
     const handleMapClick = (e) => {
         const features = e.features
@@ -25,7 +28,9 @@ const ReactMapGLWrapper = ({ height, width }) => {
         const pothole =
             features.find((feature) => feature.source === "potholes_2019") ??
             null // this will be null if map click isn't over a pothole, so this handles deselection too
+
         setSelectedPothole(pothole)
+        setIsPopupOpen(pothole !== null)
     }
 
     return (
@@ -48,6 +53,7 @@ const ReactMapGLWrapper = ({ height, width }) => {
                 }}
             />
             <PotholeLayer />
+            <PotholePopup />
         </ReactMapGL>
     )
 }
